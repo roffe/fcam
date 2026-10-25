@@ -32,7 +32,7 @@ require (
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
 	github.com/nicksnyder/go-i18n/v2 v2.5.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/roffe/gowgpu v0.0.0-20261025173827-316ed0cb9155 // indirect
+	github.com/roffe/gowgpu v0.0.0-20261025174757-5f979fa489cc // indirect
 	github.com/roffe/naga v0.0.0-20261025173350-5d34f009387c // indirect
 	github.com/rymdport/portal v0.4.2 // indirect
 	github.com/srwiley/oksvg v0.0.0-20221011165216-be6e8873101c // indirect
@@ -49,6 +49,6 @@ require (
 
 replace github.com/roffe/fcam => ../..
 
-replace fyne.io/fyne/v2 => github.com/roffe/fyne/v2 v2.0.0-20261025173945-6fb279f554e2
+replace fyne.io/fyne/v2 => github.com/roffe/fyne/v2 v2.0.0-20261025175910-1cb8e5335966
 
 replace github.com/go-gl/glfw/v3.4/glfw => github.com/roffe/glfw/v3.4/glfw v0.1.0-pre.2.0.20261021211529-a7e7690b3fbc
