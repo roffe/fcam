@@ -5,7 +5,7 @@
 // to RGB on the GPU.
 //
 // Mobile apps have to declare that they use the camera: the Android manifest
-// needs the android.permission.CAMERA permission (see example/AndroidManifest.xml),
+// needs the android.permission.CAMERA permission (see examples/viewer/AndroidManifest.xml),
 // and the Info.plist of an iOS or a bundled macOS app needs
 // NSCameraUsageDescription. Open asks the user for access when it has to.
 package fcam

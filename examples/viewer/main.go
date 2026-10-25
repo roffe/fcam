@@ -1,4 +1,4 @@
-// Command example shows a camera picked from a list of the system's video inputs.
+// Command viewer shows a camera picked from a list of the system's video inputs.
 package main
 
 import (
@@ -19,7 +19,7 @@ import (
 )
 
 func main() {
-	a := app.NewWithID("com.roffe.fcam")
+	a := app.NewWithID("com.roffe.fcam.viewer")
 	w := a.NewWindow("fcam")
 	cam := fcam.NewCamera()
 	status := widget.NewLabel("")

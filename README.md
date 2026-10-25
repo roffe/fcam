@@ -2,7 +2,7 @@
 
 A camera widget for [Fyne](https://fyne.io). Webcams, capture cards and phone cameras, through each system's own capture API, so there's no FFmpeg or anything else to install or bundle.
 
-The pictures go to the painter as YUV in a `canvas.VideoFrame` and get turned into RGB on the GPU.
+The pictures go to the painter as YUV in a `canvas.VideoFrame` and get turned into RGB on the GPU. There's a QR code reader built on it too, see [Reading QR codes](#reading-qr-codes).
 
 ## Platforms
 
@@ -113,30 +113,47 @@ func newMyCamera() *myCamera {
 }
 ```
 
-[example/main.go](example/main.go) is a small demo with dropdowns for the camera, its resolution and frame rate, and a Capture button that saves the picture as a JPEG, or a PNG when the name ends in `.png`:
+## Reading QR codes
+
+The `qr` package has a `Scanner`, a `Camera` that reads the QR codes it sees with [gozxing](https://github.com/makiuchi-d/gozxing), a Go port of ZXing, so still no C libraries. Only apps that import `qr` get gozxing compiled in.
+
+```go
+scanner := qr.NewScanner()
+scanner.OnCode = func(text string) { // on the main goroutine
+	fmt.Println("read", text)
+}
+scanner.Open(dev, fcam.Resolution{}, 0, nil)
+```
+
+It looks for a code five times a second while the camera runs, about 25 ms of CPU each time at 1280x720. A code gets reported when it comes into view, holding it there or taking it away for less than two seconds doesn't report it again. `Close` stops the reading too. Small or far away codes read better at a higher resolution.
+
+## Examples
+
+[examples/viewer](examples/viewer/main.go) has dropdowns for the camera, its resolution and frame rate, and a Capture button that saves the picture as a JPEG, or a PNG when the name ends in `.png`. [examples/qr](examples/qr/main.go) reads QR codes, with buttons to copy what it read and to open it when it's a link.
 
 ```sh
-go run ./example
+go run ./examples/viewer
+go run ./examples/qr
 ```
 
 ## Permissions
 
-Android apps need the camera permission in their manifest, fyne package uses an `AndroidManifest.xml` it finds next to the code, see [example/AndroidManifest.xml](example/AndroidManifest.xml). `Open` asks the user for it when the app doesn't have it yet.
+Android apps need the camera permission in their manifest, fyne package uses an `AndroidManifest.xml` it finds next to the code, see [examples/viewer/AndroidManifest.xml](examples/viewer/AndroidManifest.xml). `Open` asks the user for it when the app doesn't have it yet.
 
 iOS apps, and bundled macOS apps, need `NSCameraUsageDescription` in their Info.plist or the system kills them when they touch the camera. The fyne tool can't add it yet, so it has to go in by hand. Run unbundled on macOS it's the terminal that gets asked.
 
-Mobile systems take the camera away from apps in the background, the demo closes it when it leaves the foreground and opens it again when it comes back.
+Mobile systems take the camera away from apps in the background, the examples close it when it leaves the foreground and opens it again when it comes back.
 
 ## Building
 
 You need Go 1.27 with cgo. Fyne comes from my fork's `wgpu` branch, go.mod points there. It has the `canvas.VideoFrame` the widget draws with, upstream Fyne doesn't.
 
-The Makefile builds the demo into `dist`:
+The Makefile builds both examples into `dist`, as `fcam_viewer_*` and `fcam_qr_*`:
 
-- `make linux` builds `dist/fcam_linux_x64`, it needs nothing on top of what any Fyne app takes
-- `make android` builds `dist/fcam_android_arm64.apk` with the NDK r30 in `~/Android`, `NDK=` picks another
-- `make install-android` installs it on the device adb sees
-- `make windows` cross compiles `dist/fcam_windows_x64.exe` with mingw, a single exe that needs no DLLs. `WINCC=` picks another compiler
+- `make linux` builds `dist/fcam_viewer_linux_x64` and `dist/fcam_qr_linux_x64`, they need nothing on top of what any Fyne app takes
+- `make android` builds the APKs with the NDK r30 in `~/Android`, `NDK=` picks another
+- `make install-android` installs them on the device adb sees
+- `make windows` cross compiles the exes with mingw, single files that need no DLLs. `WINCC=` picks another compiler
 
 The NDK camera library came with Android 7 but fyne builds for Android 5, so fcam loads it when it's first used.
 
@@ -152,4 +169,4 @@ The NDK camera library came with Android 7 but fyne builds for Android 5, so fca
 go test ./...
 ```
 
-The capture test reads from the first camera it finds and gets skipped when there is none.
+The capture test reads from the first camera it finds and gets skipped when there is none. The `qr` tests read a generated code, no camera needed.

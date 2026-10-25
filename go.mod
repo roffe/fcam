@@ -2,7 +2,10 @@ module github.com/roffe/fcam
 
 go 1.27.3
 
-require fyne.io/fyne/v2 v2.8.2
+require (
+	fyne.io/fyne/v2 v2.8.2
+	github.com/makiuchi-d/gozxing v0.1.1
+)
 
 require (
 	fyne.io/systray v1.12.3-0.20260810170012-af4e8e793ec4 // indirect
@@ -40,6 +43,7 @@ require (
 	golang.org/x/net v0.35.0 // indirect
 	golang.org/x/sys v0.47.0 // indirect
 	golang.org/x/text v0.22.0 // indirect
+	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
