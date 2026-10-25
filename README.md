@@ -129,13 +129,14 @@ It looks for a code five times a second while the camera runs, about 25 ms of CP
 
 ## Examples
 
-[examples/viewer](examples/viewer/main.go) has dropdowns for the camera, its resolution and frame rate, and a Capture button that saves the picture as a JPEG, or a PNG when the name ends in `.png`. [examples/qr](examples/qr/main.go) reads QR codes, with buttons to copy what it read and to open it when it's a link.
+[examples/viewer](examples/viewer/main.go) has dropdowns for the camera, its resolution and frame rate, and a Capture button that saves the picture as a JPEG, or a PNG when the name ends in `.png`. [examples/qr](examples/qr/main.go) reads QR codes, with buttons to copy what it read and to open it when it's a link. [examples/track](examples/track/detect.go) draws boxes around faces, found with [pigo](https://github.com/esimov/pigo) (pure Go too, about 18 ms a 720p picture), or around what moves, by diffing the pictures. It maps the boxes from the picture onto the widget by itself, the picture is fitted inside the widget and centered.
 
 Each example is a module of its own, so what they pull in stays out of fcam's go.mod:
 
 ```sh
 cd examples/viewer; go run .
 cd examples/qr; go run .
+cd examples/track; go run .
 ```
 
 ## Permissions
@@ -150,9 +151,9 @@ Mobile systems take the camera away from apps in the background, the examples cl
 
 You need Go 1.27 with cgo. Fyne comes from my fork's `wgpu` branch, go.mod points there. It has the `canvas.VideoFrame` the widget draws with, upstream Fyne doesn't.
 
-The Makefile builds both examples into `dist`, as `fcam_viewer_*` and `fcam_qr_*`:
+The Makefile builds the examples into `dist`, as `fcam_viewer_*`, `fcam_qr_*` and `fcam_track_*`:
 
-- `make linux` builds `dist/fcam_viewer_linux_x64` and `dist/fcam_qr_linux_x64`, they need nothing on top of what any Fyne app takes
+- `make linux` builds `dist/fcam_viewer_linux_x64` and the others, they need nothing on top of what any Fyne app takes
 - `make android` builds the APKs with the NDK r30 in `~/Android`, `NDK=` picks another
 - `make install-android` installs them on the device adb sees
 - `make windows` cross compiles the exes with mingw, single files that need no DLLs. `WINCC=` picks another compiler
@@ -170,6 +171,7 @@ The NDK camera library came with Android 7 but fyne builds for Android 5, so fca
 ```sh
 go test ./...
 cd examples/qr; go test .
+cd examples/track; go test .
 ```
 
-The capture test reads from the first camera it finds and gets skipped when there is none. The QR tests read a generated code, no camera needed.
+The capture test reads from the first camera it finds and gets skipped when there is none. The QR and tracking tests use generated pictures, no camera needed.

@@ -4,7 +4,7 @@ NDK?=$(HOME)/Android/android-ndk-r30
 ADB?=$(HOME)/Android/platform-tools/adb
 FYNE?=fyne
 WINCC?=x86_64-w64-mingw32-gcc
-EXAMPLES=viewer qr
+EXAMPLES=viewer qr track
 
 linux:
 	mkdir -p dist
