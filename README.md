@@ -2,7 +2,7 @@
 
 A camera widget for [Fyne](https://fyne.io). Webcams, capture cards and phone cameras, through each system's own capture API, so there's no FFmpeg or anything else to install or bundle.
 
-The pictures go to the painter as YUV in a `canvas.VideoFrame` and get turned into RGB on the GPU. There's a QR code reader built on it too, see [Reading QR codes](#reading-qr-codes).
+The pictures go to the painter as YUV in a `canvas.VideoFrame` and get turned into RGB on the GPU. Detectors like QR code readers go on top of it in your app, see [Reading QR codes](#reading-qr-codes).
 
 ## Platforms
 
@@ -115,10 +115,10 @@ func newMyCamera() *myCamera {
 
 ## Reading QR codes
 
-The `qr` package has a `Scanner`, a `Camera` that reads the QR codes it sees with [gozxing](https://github.com/makiuchi-d/gozxing), a Go port of ZXing, so still no C libraries. Only apps that import `qr` get gozxing compiled in.
+[examples/qr](examples/qr/scanner.go) has a `Scanner`, a `Camera` that reads the QR codes it sees with [gozxing](https://github.com/makiuchi-d/gozxing), a Go port of ZXing, so still no C libraries. It's the pattern for putting anything on top of the widget: embed `fcam.Camera`, poll `Capture` on a goroutine and report back with `fyne.Do`. Copy it into your app, fcam itself doesn't depend on gozxing.
 
 ```go
-scanner := qr.NewScanner()
+scanner := NewScanner()
 scanner.OnCode = func(text string) { // on the main goroutine
 	fmt.Println("read", text)
 }
@@ -131,9 +131,11 @@ It looks for a code five times a second while the camera runs, about 25 ms of CP
 
 [examples/viewer](examples/viewer/main.go) has dropdowns for the camera, its resolution and frame rate, and a Capture button that saves the picture as a JPEG, or a PNG when the name ends in `.png`. [examples/qr](examples/qr/main.go) reads QR codes, with buttons to copy what it read and to open it when it's a link.
 
+Each example is a module of its own, so what they pull in stays out of fcam's go.mod:
+
 ```sh
-go run ./examples/viewer
-go run ./examples/qr
+cd examples/viewer; go run .
+cd examples/qr; go run .
 ```
 
 ## Permissions
@@ -167,6 +169,7 @@ The NDK camera library came with Android 7 but fyne builds for Android 5, so fca
 
 ```sh
 go test ./...
+cd examples/qr; go test .
 ```
 
-The capture test reads from the first camera it finds and gets skipped when there is none. The `qr` tests read a generated code, no camera needed.
+The capture test reads from the first camera it finds and gets skipped when there is none. The QR tests read a generated code, no camera needed.

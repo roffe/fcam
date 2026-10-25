@@ -1,4 +1,4 @@
-package qr
+package main
 
 import (
 	"image"

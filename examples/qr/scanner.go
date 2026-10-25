@@ -1,6 +1,4 @@
-// Package qr is a Fyne widget that reads the QR codes a camera sees, with
-// gozxing, a Go port of ZXing.
-package qr
+package main
 
 import (
 	"image"

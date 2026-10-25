@@ -11,13 +11,12 @@ import (
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 	"github.com/roffe/fcam"
-	"github.com/roffe/fcam/qr"
 )
 
 func main() {
 	a := app.NewWithID("com.roffe.fcam.qr")
 	w := a.NewWindow("fcam QR")
-	scanner := qr.NewScanner()
+	scanner := NewScanner()
 	info := widget.NewLabel("Hold a QR code up to the camera")
 	info.Wrapping = fyne.TextWrapWord
 
