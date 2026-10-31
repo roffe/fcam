@@ -29,6 +29,8 @@ github.com/go-text/typesetting-utils v0.0.0-20260419141703-4ffe8874dabc h1:8FGo2
 github.com/go-text/typesetting-utils v0.0.0-20260419141703-4ffe8874dabc/go.mod h1:3/62I4La/HBRX9TcTpBj4eipLiwzf+vhI+7whTc9V7o=
 github.com/godbus/dbus/v5 v5.2.2 h1:TUR3TgtSVDmjiXOgAAyaZbYmIeP3DPkld3jgKGV8mXQ=
 github.com/godbus/dbus/v5 v5.2.2/go.mod h1:3AAv2+hPq5rdnr5txxxRwiGjPXamgoIHgz9FPBfOp3c=
+github.com/gogpu/naga v0.20.6-0.20261031111303-7e8984a54a3c h1:NHz0w3kVa5zLPpAWTEqAESESfqyKb7cirjy35l7HubY=
+github.com/gogpu/naga v0.20.6-0.20261031111303-7e8984a54a3c/go.mod h1:15sQaHKkbqXcwTN+hHYGLsA0WBBnkmYzne/eF5p5WEg=
 github.com/hack-pad/go-indexeddb v0.3.2 h1:DTqeJJYc1usa45Q5r52t01KhvlSN02+Oq+tQbSBI91A=
 github.com/hack-pad/go-indexeddb v0.3.2/go.mod h1:QvfTevpDVlkfomY498LhstjwbPW6QC4VC/lxYb0Kom0=
 github.com/hack-pad/safejs v0.1.0 h1:qPS6vjreAqh2amUqj4WNG1zIw7qlRQJ9K10eDKMCnE8=
@@ -49,14 +51,12 @@ github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e h1:fD57ERR4JtEqsWb
 github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e/go.mod h1:zD1mROLANZcx1PVRCS0qkT7pwLkGfwJo4zjcN/Tysno=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
-github.com/roffe/fyne/v2 v2.0.0-20261028102534-1fccb7b6f9ae h1:KQToU4/kuNfCUtT+cGn1UVfChNztHWeK5uozdhoWFv8=
-github.com/roffe/fyne/v2 v2.0.0-20261028102534-1fccb7b6f9ae/go.mod h1:HgiCGxkB92HUf3aRphbnvE8oPHLOoI/31nOsWQyQ52Y=
+github.com/roffe/fyne/v2 v2.0.0-20261031111849-28131f8c3fe9 h1:zz1JjBy8Oc/k5SjcE01hvcWgM3g4a45C6tVhZh3rRHM=
+github.com/roffe/fyne/v2 v2.0.0-20261031111849-28131f8c3fe9/go.mod h1:6bO+4mpFQGjbJPfCTcRfCG+veqOxgEDR0ap5WJHHrFY=
 github.com/roffe/glfw/v3.4/glfw v0.1.0-pre.2.0.20261021211529-a7e7690b3fbc h1:aWuWuc9HHeAqSLB4vnvgz+lcCGuK85FNYH6d6SxPwYU=
 github.com/roffe/glfw/v3.4/glfw v0.1.0-pre.2.0.20261021211529-a7e7690b3fbc/go.mod h1:T5Dn0JwIJOX1euPZ/iT4tq6nFYtmukjcYa7937HuYK8=
-github.com/roffe/gowgpu v0.0.0-20261028100612-49d601b1ade0 h1:FnwbE9R0abbJHZsSfvK4HjCZiHkmshqtxDl9Qb/wOHc=
-github.com/roffe/gowgpu v0.0.0-20261028100612-49d601b1ade0/go.mod h1:FO0O/LfXO4yEm9s/aywQvjjJyYiE3oA94kwBuUq8L3o=
-github.com/roffe/naga v0.0.0-20261028100100-81f6a794b048 h1:4YQOT9xQeDyAwUlukrf7n5owHekf8ky0wSCnsS8PB1s=
-github.com/roffe/naga v0.0.0-20261028100100-81f6a794b048/go.mod h1:xVSreQeq7W169Wr9X6TuyO/I959MnEGw4xxAGOsGQns=
+github.com/roffe/gowgpu v0.0.0-20261031111521-45c1d97b4093 h1:/YqxKbUpDX8Q5KP7raJrts2DFOGRQS9QkJZPpWicUdQ=
+github.com/roffe/gowgpu v0.0.0-20261031111521-45c1d97b4093/go.mod h1:XZJ7JoezQIPMmAJg19z/RDD5zYYQ659Uk43rxmWicF4=
 github.com/rymdport/portal v0.4.2 h1:7jKRSemwlTyVHHrTGgQg7gmNPJs88xkbKcIL3NlcmSU=
 github.com/rymdport/portal v0.4.2/go.mod h1:kFF4jslnJ8pD5uCi17brj/ODlfIidOxlgUDTO5ncnC4=
 github.com/srwiley/oksvg v0.0.0-20221011165216-be6e8873101c h1:km8GpoQut05eY3GiYWEedbTT0qnSxrCjsVbb7yKY1KE=
